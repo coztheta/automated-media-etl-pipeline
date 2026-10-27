@@ -1,4 +1,4 @@
-
+import pendulum
 from datetime import datetime
 
 from airflow import DAG
@@ -9,8 +9,8 @@ PROJECT_DIR = "/opt/airflow/project"
 with DAG(
     dag_id="media_etl_pipeline",
     description="Extract, transform, and load trending media into BigQuery",
-    start_date=datetime(2026, 1, 1),
-    schedule=None,
+    start_date=pendulum.datetime(2026, 1, 1, tz="Asia/Kolkata"),
+    schedule="0 9 * * *",
     catchup=False,
     tags=["media", "etl", "bigquery"],
 ) as dag:
