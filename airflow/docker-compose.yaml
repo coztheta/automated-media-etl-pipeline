@@ -1,0 +1,22 @@
+services:
+  airflow:
+    build:
+      context: ..
+      dockerfile: airflow/Dockerfile
+    container_name: media-airflow
+    command: standalone
+    ports:
+      - "8080:8080"
+    environment:
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__CORE__EXECUTOR: SequentialExecutor
+      AIRFLOW__CORE__FERNET_KEY: ""
+      AIRFLOW__WEBSERVER__SECRET_KEY: "media-etl-local-dev-key"
+      AIRFLOW__WEBSERVER__EXPOSE_CONFIG: "false"
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ../:/opt/airflow/project
+      - "${APPDATA}/gcloud:/home/airflow/.config/gcloud:ro"
+      - ../.env:/opt/airflow/project/.env:ro
+    restart: unless-stopped
+

@@ -1,9 +1,10 @@
-# Secrets
+# Secrets and credentials
 .env
 .env.*
 !.env.example
-
-# Google Cloud credentials
+*.json
+*.pem
+*.key
 *service-account*.json
 *service_account*.json
 credentials.json
@@ -21,5 +22,11 @@ clean_media.csv
 # VS Code
 .vscode/
 
-# Google Cloud service account keys
-*.json
+# Airflow runtime files
+airflow/logs/
+airflow/airflow.db
+airflow/.env
+
+# OS files
+.DS_Store
+Thumbs.db
